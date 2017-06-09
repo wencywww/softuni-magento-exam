@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_softuni_contest_contestant_index>
+   <!--     <remove name="header"></remove>-->
+        <reference name="content">
+            <block type="softuni_contest/adminhtml_contestant" name="softuni_contest.contestant"/>
+        </reference>
+    </adminhtml_softuni_contest_contestant_index>
+
+ <!--   <adminhtml_softuni_contest_contestant_new>
+        <update handle="adminhtml_softuni_contest_contestant_edit"/>
+    </adminhtml_softuni_contest_contestant_new>
+
+    <adminhtml_softuni_contest_contestant_edit>
+        <reference name="content">
+            <block type="softuni_contest/adminhtml_contestant_edit" name="softuni_contest.contestant.edit"/>
+        </reference>
+    </adminhtml_softuni_contest_contestant_edit>-->
+</layout>

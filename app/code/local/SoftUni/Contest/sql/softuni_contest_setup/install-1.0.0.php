@@ -5,7 +5,7 @@ $installer = $this;
 $installer->startSetup();
 
 /**
- * Create table 'softuni_magento_exam/contestant'
+ * Create table 'softuni_magento_exam/softuni_contest_contestant'
  */
 $tableContestant = $installer->getConnection()
     ->newTable($installer->getTable('softuni_contest/contestant'))
@@ -43,7 +43,7 @@ $installer->getConnection()->createTable($tableContestant);
 
 
 /**
- * Create table 'softuni_magento_exam/contest'
+ * Create table 'softuni_magento_exam/softuni_contest_contest'
  */
 $tableContest = $installer->getConnection()
     ->newTable($installer->getTable('softuni_contest/contest'))

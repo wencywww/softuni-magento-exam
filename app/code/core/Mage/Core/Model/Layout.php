@@ -481,6 +481,7 @@ class Mage_Core_Model_Layout extends Varien_Simplexml_Config
      */
     protected function _getBlockInstance($block, array $attributes=array())
     {
+        //var_dump($block);
         if (is_string($block)) {
             if (strpos($block, '/')!==false) {
                 if (!$block = Mage::getConfig()->getBlockClassName($block)) {
