@@ -83,6 +83,34 @@
         </layout>
     </adminhtml>
 
+    <frontend>
+        <translate>
+            <modules>
+                <SoftUni_Contest>
+                    <files>
+                        <default>SoftUni_Contest.csv</default>
+                    </files>
+                </SoftUni_Contest>
+            </modules>
+        </translate>
+        <routers>
+            <softuni_contest>
+                <use>standard</use>
+                <args>
+                    <module>SoftUni_Contest</module>
+                    <frontName>softuni_contest</frontName>
+                </args>
+            </softuni_contest>
+        </routers>
+        <layout>
+            <updates>
+                <softuni_contest module="SoftUni_Contest">
+                    <file>softuni_contest.xml</file>
+                </softuni_contest>
+            </updates>
+        </layout>
+    </frontend>
+
 
 </config>
 

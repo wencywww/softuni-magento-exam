@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <softuni_contest_form_enter>
+<!--        <remove name="root"/>-->
+        <reference name="content">
+            <block type="softuni_contest/form" name="softuni_contest.form" template="softuni/contest/form.phtml">
+            </block>
+        </reference>
+    </softuni_contest_form_enter>
+</layout>

@@ -1,0 +1,21 @@
+<form action="<?php echo $this->getActionUrl(); ?>" method="post">
+    <h1><?php echo getContestInfo()['title']?></h1>
+    <label><?php echo Mage::helper('softuni_contest')->__('Name'); ?>: </label><br><input type="text" name="firstname"><br><br>
+    <label><?php echo Mage::helper('softuni_contest')->__('Family'); ?>: </label><br><input type="text" name="lastname"><br><br>
+    <label><?php echo Mage::helper('softuni_contest')->__('Birthday'); ?>: </label><br><input type="text" name="dob"><br><br>
+    <label><?php echo Mage::helper('softuni_contest')->__('Country'); ?>: </label><br><input type="text" name="country"><br><br>
+    <label><?php echo Mage::helper('softuni_contest')->__('City'); ?>: </label><br><input type="text" name="city"><br><br>
+    <label><?php echo Mage::helper('softuni_contest')->__('Message'); ?>: </label><br><input type="text" name="message"><br><br>
+    <input type="hidden" name="contest_id" value="<?php echo getContestInfo()['id'];?>">
+    <button><?php echo Mage::helper('softuni_contest')->__('Submit'); ?></button>
+</form>
+
+<?php
+    function getContestInfo()
+    {
+        $contestID = Mage::app()->getRequest()->getParam('cid');
+        $title = Mage::getModel('softuni_contest/contest')->load((int) $contestID)->getData('title');
+        return array('title'=>'Entering contest: '. $title, 'id'=>$contestID);
+    }
+?>
+
