@@ -29,7 +29,7 @@ class SoftUni_Contest_Block_Adminhtml_Contestant_Grid
     {
         $baseUrl = $this->getUrl();
 
-        $this->addColumn('contestantID', array(
+        $this->addColumn('contestant_id', array(
             'header'    => Mage::helper('softuni_contest')->__('Contestant ID'),
             'type'     => 'number',
             'index'     => 'contestant_id'
@@ -38,13 +38,15 @@ class SoftUni_Contest_Block_Adminhtml_Contestant_Grid
         $this->addColumn('contestID', array(
             'header'    => Mage::helper('softuni_contest')->__('Contest'),
             'type'     => 'text',
-            'index'     => 'contest_id'
+            'index'     => 'contest_id',
+            'renderer' => 'SoftUni_Contest_Block_Adminhtml_Contestant_Grid_Renderer'
         ));
 
         $this->addColumn('approved', array(
             'header'    => Mage::helper('softuni_contest')->__('Is Approved'),
             'type'     => 'boolean',
-            'index'     => 'approved'
+            'index'     => 'approved',
+            'renderer' => 'SoftUni_Contest_Block_Adminhtml_Contestant_Grid_Renderer'
         ));
 
         $this->addColumn('firstName', array(
@@ -61,7 +63,7 @@ class SoftUni_Contest_Block_Adminhtml_Contestant_Grid
 
         $this->addColumn('dateOfBirth', array(
             'header'    => Mage::helper('softuni_contest')->__('Birthday'),
-            'type'     => 'text',
+            'type'     => 'date',
             'index'     => 'dob'
         ));
 
@@ -103,4 +105,28 @@ class SoftUni_Contest_Block_Adminhtml_Contestant_Grid
         return $this->getUrl('*/*/edit', array('contestant_id' => $row->getContestantId()));
     }
 
+}
+
+
+class SoftUni_Contest_Block_Adminhtml_Contestant_Grid_Renderer extends
+    Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+{
+    public function render(Varien_Object $row) {
+
+        $colIndex = $this->getColumn()->getIndex();
+        $value = $row->getData($this->getColumn()->getIndex());
+
+        //var_dump($colIndex);
+
+        if ($colIndex == 'contest_id'){
+            $contestName = Mage::getModel('softuni_contest/contest')->load($value)->getTitle();
+            return '<span style="color: #0077ff;">' .$contestName.'</span>';
+        }elseif($colIndex == 'approved'){
+            $approvalStatus = $value == 1 ? Mage::helper('softuni_contest')->__('Yes'):Mage::helper('softuni_contest')->__('No');
+            $color = ($value == 1)?("#0077ff"):("#ff0000");
+            return "<span style=\"color: ".$color." \">" .$approvalStatus."</span>";
+
+        }
+
+    }
 }

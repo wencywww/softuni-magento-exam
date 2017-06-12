@@ -8,7 +8,7 @@
         </reference>
     </adminhtml_softuni_contest_contestant_index>
 
- <!--   <adminhtml_softuni_contest_contestant_new>
+    <adminhtml_softuni_contest_contestant_new>
         <update handle="adminhtml_softuni_contest_contestant_edit"/>
     </adminhtml_softuni_contest_contestant_new>
 
@@ -16,5 +16,5 @@
         <reference name="content">
             <block type="softuni_contest/adminhtml_contestant_edit" name="softuni_contest.contestant.edit"/>
         </reference>
-    </adminhtml_softuni_contest_contestant_edit>-->
+    </adminhtml_softuni_contest_contestant_edit>
 </layout>

@@ -104,6 +104,7 @@ class Mage_Adminhtml_Block_Cms_Page_Edit_Tab_Main
             $model->setStoreId(Mage::app()->getStore(true)->getId());
         }
 
+        //var_dump($model->getAvailableStatuses()); //die();
         $fieldset->addField('is_active', 'select', array(
             'label'     => Mage::helper('cms')->__('Status'),
             'title'     => Mage::helper('cms')->__('Page Status'),

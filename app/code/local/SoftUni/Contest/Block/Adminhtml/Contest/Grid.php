@@ -46,7 +46,8 @@ class SoftUni_Contest_Block_Adminhtml_Contest_Grid extends Mage_Adminhtml_Block_
         $this->addColumn('approved', array(
             'header'    => Mage::helper('softuni_contest')->__('Is Active'),
             'type'     => 'boolean',
-            'index'     => 'is_active'
+            'index'     => 'is_active',
+            'renderer' => 'SoftUni_Contest_Block_Adminhtml_Contest_Grid_Renderer'
         ));
 
         $this->addColumn('createdAt', array(
@@ -69,4 +70,27 @@ class SoftUni_Contest_Block_Adminhtml_Contest_Grid extends Mage_Adminhtml_Block_
         return $this->getUrl('*/*/edit', array('contest_id' => $row->getContestId()));
     }
 
+}
+
+class SoftUni_Contest_Block_Adminhtml_Contest_Grid_Renderer extends
+    Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+{
+    public function render(Varien_Object $row) {
+
+        $colIndex = $this->getColumn()->getIndex();
+        $value = $row->getData($this->getColumn()->getIndex());
+
+        //var_dump($colIndex);
+
+        if ($colIndex == 'contest_id'){
+            $contestName = Mage::getModel('softuni_contest/contest')->load($value)->getTitle();
+            return '<span style="color: #0077ff;">' .$contestName.'</span>';
+        }elseif($colIndex == 'is_active'){
+            $approvalStatus = $value == 1 ? Mage::helper('softuni_contest')->__('Yes'):Mage::helper('softuni_contest')->__('No');
+            $color = ($value == 1)?("#0077ff"):("#ff0000");
+            return "<span style=\"color: ".$color." \">" .$approvalStatus."</span>";
+
+        }
+
+    }
 }

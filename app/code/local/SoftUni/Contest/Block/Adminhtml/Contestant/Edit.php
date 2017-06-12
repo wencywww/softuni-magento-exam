@@ -1,15 +1,15 @@
 <?php
-class SoftUni_VentsyslavVassilev_Block_Adminhtml_VentsyslavVassilev_Edit
+class SoftUni_Contest_Block_Adminhtml_Contestant_Edit
     extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
     {
-        $this->_objectId = 'ID';
-        $this->_blockGroup = 'softuni_ventsyslavvassilev';
-        $this->_controller = 'adminhtml_ventsyslavvassilev';
+        $this->_objectId = 'contestant_id';
+        $this->_blockGroup = 'softuni_contest';
+        $this->_controller = 'adminhtml_contestant';
         parent::__construct();
-        $this->_updateButton('save', 'label', Mage::helper('softuni_ventsyslavvassilev')->__('Save Submission'));
-        $this->_updateButton('delete', 'label', Mage::helper('softuni_ventsyslavvassilev')->__('Delete Submission'));
+        $this->_updateButton('save', 'label', Mage::helper('softuni_contest')->__('Save Contestant'));
+        $this->_updateButton('delete', 'label', Mage::helper('softuni_contest')->__('Delete Contestant'));
         $this->_addButton('saveandcontinue', array(
             'label'     => Mage::helper('adminhtml')->__('Save and Continue Edit'),
             'onclick'   => 'saveAndContinueEdit()',

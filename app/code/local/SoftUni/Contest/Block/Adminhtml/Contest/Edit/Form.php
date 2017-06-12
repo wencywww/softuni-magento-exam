@@ -1,5 +1,5 @@
 <?php
-class SoftUni_VentsyslavVassilev_Block_Adminhtml_VentsyslavVassilev_Edit_Form
+class SoftUni_Contest_Block_Adminhtml_Contest_Edit_Form
     extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
@@ -8,51 +8,44 @@ class SoftUni_VentsyslavVassilev_Block_Adminhtml_VentsyslavVassilev_Edit_Form
     public function __construct()
     {
         parent::__construct();
-        $this->setId('softuni_ventsyslavvassilev_ventsyslavvassilev_form');
-        $this->setTitle(Mage::helper('softuni_ventsyslavvassilev')->__('Submission Information'));
+        $this->setId('softuni_contest_contest_form');
+        $this->setTitle(Mage::helper('softuni_contest')->__('Contest Details'));
     }
     protected function _prepareForm()
     {
-        $model = Mage::registry('softuni_ventsyslavvassilev_ventsyslavvassilev');
+        $model = Mage::registry('softuni_contest_contest');
         $form = new Varien_Data_Form(array(
             'id'     => 'edit_form',
-            'action' => $this->getUrl('adminhtml/softuni_ventsyslavvassilev_ventsyslavvassilev/save'),
+            'action' => $this->getUrl('adminhtml/softuni_contest_contest/save'),
             'method' => 'post'
         ));
-        $form->setHtmlIdPrefix('softuni_ventsyslavvassilev_ventsyslavvassilev_');
+        $form->setHtmlIdPrefix('softuni_contest_contest_');
         $fieldset = $form->addFieldset('base_fieldset', array(
             'legend' => Mage::helper('cms')->__('General Information'),
             'class' => 'fieldset-wide'
         ));
-        if ($model->getId()) {
-            $fieldset->addField('ID', 'hidden', array(
-                'name' => 'ID',
+
+        if ($model->getContestId()) {
+            $fieldset->addField('contest_id', 'hidden', array(
+                'name' => 'contest_id',
             ));
         }
-        $fieldset->addField('Name', 'text', array(
-            'name'      => 'Name',
-            'label'     => Mage::helper('softuni_ventsyslavvassilev')->__('Names'),
-            'title'     => Mage::helper('softuni_ventsyslavvassilev')->__('Names'),
-            'required'  => true,
-        ));
-        $fieldset->addField('Phone', 'text', array(
-            'name'      => 'Phone',
-            'label'     => Mage::helper('softuni_ventsyslavvassilev')->__('Phone'),
-            'title'     => Mage::helper('softuni_ventsyslavvassilev')->__('Phone'),
+
+        $fieldset->addField('is_active', 'checkbox', array(
+            'name'      => 'is_active',
+            'label'     => Mage::helper('softuni_contest')->__('Is Active'),
+            'title'     => Mage::helper('softuni_contest')->__('Is Active'),
+            'checked'   => $model->getIsActive() ? true: false,
             'required'  => false,
         ));
-        $fieldset->addField('Age', 'text', array(
-            'name'      => 'Age',
-            'label'     => Mage::helper('softuni_ventsyslavvassilev')->__('Age'),
-            'title'     => Mage::helper('softuni_ventsyslavvassilev')->__('Age'),
-            'required'  => false,
-        ));
-        $fieldset->addField('Email', 'text', array(
-            'name'      => 'Email',
-            'label'     => Mage::helper('softuni_ventsyslavvassilev')->__('Email'),
-            'title'     => Mage::helper('softuni_ventsyslavvassilev')->__('Email'),
+
+        $fieldset->addField('title', 'text', array(
+            'name'      => 'title',
+            'label'     => Mage::helper('softuni_contest')->__('Title'),
+            'title'     => Mage::helper('softuni_contest')->__('Title'),
             'required'  => true,
         ));
+
         $form->setValues($model->getData());
         //var_dump($model->getData());
 
@@ -60,4 +53,5 @@ class SoftUni_VentsyslavVassilev_Block_Adminhtml_VentsyslavVassilev_Edit_Form
         $this->setForm($form);
         return parent::_prepareForm();
     }
+
 }

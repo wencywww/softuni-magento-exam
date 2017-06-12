@@ -23,15 +23,15 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
 
     public function editAction()
     {
-        $this->_title($this->__('Submission'));
-        $submissionID = $this->getRequest()->getParam('contestantID');
-        $model = Mage::getModel('softuni_ventsyslavvassilev/ventsyslavvassilev');
+        $this->_title($this->__('Contestant'));
+        $contestantID = $this->getRequest()->getParam('contestant_id');
+        $model = Mage::getModel('softuni_contest/contestant');
 
-        if ($submissionID) {
-            $model->load($submissionID);
+        if ($contestantID) {
+            $model->load($contestantID);
             if (!$model->getContestantId()) {
                 Mage::getSingleton('adminhtml/session')->addError(
-                    Mage::helper('softuni_ventsyslavvassilev')->__('This submission no longer exists.')
+                    Mage::helper('softuni_contest')->__('This contestant no longer exists.')
                 );
                 $this->_redirectReferer();
                 return;
@@ -40,8 +40,8 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
 
         $this->_title(
             $model->getContestantId() ?
-                $model->getName() :
-                $this->__('New Submission')
+                $model->getFirstname() . " " . $model->getLastname()  :
+                $this->__('New Contestant')
         );
         // 3. Set entered data if was error when we do save
         $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
@@ -49,7 +49,7 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
             $model->setData($data);
         }
         // 4. Register model to use later in blocks
-        Mage::register('softuni_ventsyslavvassilev_ventsyslavvassilev', $model);
+        Mage::register('softuni_contest_contestant', $model);
 
         $this->loadLayout();
         $this->renderLayout();
@@ -60,30 +60,42 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
     {
         // check if data sent
         if ($data = $this->getRequest()->getPost()) {
-            $submissionId = $this->getRequest()->getParam('ID');
-            $model = Mage::getModel('softuni_ventsyslavvassilev/ventsyslavvassilev')->load($submissionId);
-            if (!$model->getContestantId() && $submissionId) {
+            $contestantId = $this->getRequest()->getParam('contestant_id');
+            $model = Mage::getModel('softuni_contest/contestant')->load($contestantId);
+
+
+            if (!$model->getContestantId() && $contestantId) {
                 Mage::getSingleton('adminhtml/session')->addError(
-                    Mage::helper('softuni_ventsyslavvassilev')->__('This submission no longer exists.')
+                    Mage::helper('softuni_contest')->__('This contestant no longer exists.')
                 );
                 $this->_redirect('*/*/index');
                 return;
             }
             // init model and set data
+            //var_dump($model->getData()); die;
             $model->setData($data);
+            if (!$contestantId)
+            {
+                $model->setCreatedAt(date('Y-m-d H:i:s')); //set created at if new contestant is created
+            }
+            $model->setUpdatedAt(date('Y-m-d H:i:s'));
+            $model->setApproved(is_null($this->getRequest()->getParam('approved')) ? 0 : 1);
+
+            //var_dump($this->getRequest()->getParam('approved')); die();
+
             // try to save it
             try {
                 // save the data
                 $model->save();
                 // display success message
                 Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('softuni_ventsyslavvassilev')->__('The submission has been saved.')
+                    Mage::helper('softuni_contest')->__('The contestant has been saved.')
                 );
                 // clear previously saved data from session
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
                 // check if 'Save and Continue'
                 if ($this->getRequest()->getParam('back')) {
-                    $this->_redirect('*/*/edit', array('ID' => $model->getContestantId()));
+                    $this->_redirect('*/*/edit', array('contestant_id' => $model->getContestantId()));
                     return;
                 }
                 // go to grid
@@ -95,7 +107,7 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
                 // save data in session
                 Mage::getSingleton('adminhtml/session')->setFormData($data);
                 // redirect to edit form
-                $this->_redirect('*/*/edit', array('ID' => $this->getRequest()->getParam('ID')));
+                $this->_redirect('*/*/edit', array('contestant_id' => $this->getRequest()->getParam('contestant_id')));
                 return;
             }
         }
@@ -106,15 +118,15 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
     public function deleteAction()
     {
         // check if we know what should be deleted
-        if ($submissionId = $this->getRequest()->getParam('ID')) {
+        if ($contestantId = $this->getRequest()->getParam('contestant_id')) {
             try {
                 // init model and delete
-                $model = Mage::getModel('softuni_ventsyslavvassilev/ventsyslavvassilev');
-                $model->load($submissionId);
+                $model = Mage::getModel('softuni_contest/contestant');
+                $model->load($contestantId);
                 $model->delete();
                 // display success message
                 Mage::getSingleton('adminhtml/session')->addSuccess(
-                    Mage::helper('softuni_ventsyslavvassilev')->__('The submission has been deleted.')
+                    Mage::helper('softuni_contest')->__('The contestant has been deleted.')
                 );
                 // go to grid
                 $this->_redirect('*/*/index');
@@ -123,13 +135,13 @@ class SoftUni_Contest_Softuni_Contest_ContestantController extends Mage_Adminhtm
                 // display error message
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 // go back to edit form
-                $this->_redirect('*/*/edit', array('ID' => $submissionId));
+                $this->_redirect('*/*/edit', array('contestant_id' => $contestantId));
                 return;
             }
         }
         // display error message
         Mage::getSingleton('adminhtml/session')->addError(
-            Mage::helper('softuni_ventsyslavvassilev')->__('Unable to find a submission to delete.')
+            Mage::helper('softuni_contest')->__('Unable to find a contestant to delete.')
         );
         // go to grid
         $this->_redirect('*/*/index');
