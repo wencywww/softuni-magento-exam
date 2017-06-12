@@ -62,10 +62,17 @@ class SoftUni_Contest_Block_Adminhtml_Contestant_Edit_Form
             'required'  => true,
         ));
 
-        Zend_Date::setOptions(array('format_type' => 'php'));
+        //Zend_Date::setOptions(array('format_type' => 'php'));
+        //$dateTimeFormatIso = Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
+        $dateTimeFormatIso = Mage::app()->getLocale()->getDateFormatWithLongYear();
+        //Mage::app()->getLocale()->getDateFormatWithLongYear()
         $fieldset->addField('dob', 'date', array(
             'name'      => 'dob',
-            'format'    => 'Y-m-d',
+            //'input'     => 'date',
+            'image'    => $this->getSkinUrl('images/grid-cal.gif'),
+            'format'    => $dateTimeFormatIso,
+            //'format'    => 'Y-m-d',
+            'time'      => false,
             'label'     => Mage::helper('softuni_contest')->__('Birthday'),
             'title'     => Mage::helper('softuni_contest')->__('Birthday'),
             'required'  => false,
