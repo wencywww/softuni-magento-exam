@@ -48,9 +48,8 @@
 							return cb.call(s, doc);
 
 						w.setTimeout(check, 10);
-					};
-
-					t = w.setTimeout(check, 10);
+                    }
+                    t = w.setTimeout(check, 10);
 				}
 
 				doc.load(u);

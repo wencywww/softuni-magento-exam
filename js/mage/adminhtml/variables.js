@@ -119,7 +119,7 @@ var Variables = {
             textareaElm.scrollTop = scrollPos;
             textareaElm = null;
         }
-        return;
+
     }
 };
 
@@ -146,7 +146,7 @@ MagentovariablePlugin = {
         } else {
             this.openChooser(this.variables);
         }
-        return;
+
     },
     openChooser: function(variables) {
         Variables.openVariableChooser(variables);
@@ -159,6 +159,6 @@ MagentovariablePlugin = {
             Variables.closeDialogWindow();
             this.editor.execCommand('mceInsertContent', false, value);
         }
-        return;
+
     }
 };

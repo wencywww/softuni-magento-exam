@@ -90,7 +90,7 @@ TranslateInline.prototype = {
             this.trigEl.style.display = 'block';
 
             Event.stop(event);
-        };
+        }
     },
 
     trigHide: function() {

@@ -1,0 +1,26 @@
+<?php
+$contests = getContests();
+?>
+
+    <h1><?php echo $this->getTitles(); ?></h1>
+    <?php echo $contests; ?>
+
+
+<?php
+function getContests()
+{
+    $contests = Mage::getModel('softuni_contest/contest')->getCollection()
+        ->addFieldToSelect(array('title'))
+        ->addFieldToFilter('is_active', 1)
+        ->load();
+
+    foreach ($contests->getData() as $val)
+    {
+        $out.="<p><a href=\"softuni_contest/form/enter/cid/".$val['contest_id']."\">".$val['title']."</a></p>";
+    }
+
+    return $out;
+
+}
+
+?>

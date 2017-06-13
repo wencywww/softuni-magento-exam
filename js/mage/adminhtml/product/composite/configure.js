@@ -427,7 +427,7 @@ ProductConfigure.prototype = {
     _toggleSelectsExceptBlock: function(flag) {
         if(Prototype.Browser.IE){
             if (this.blockForm) {
-                var states = new Array;
+                var states = [];
                 var selects = this.blockForm.getElementsByTagName("select");
                 for(var i=0; i<selects.length; i++){
                     states[i] = selects[i].style.visibility;

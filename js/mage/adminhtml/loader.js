@@ -186,7 +186,7 @@ varienLoader.prototype = {
 };
 
 if (!window.varienLoaderHandler)
-    var varienLoaderHandler = new Object();
+    var varienLoaderHandler = {};
 
 varienLoaderHandler.handler = {
     onCreate: function(request) {

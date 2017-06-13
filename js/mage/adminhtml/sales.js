@@ -408,7 +408,7 @@ AdminOrder.prototype = {
             if (data) {
                  this.loadArea(['card_validation'], true, data);
             } else {
-                return;
+
             }
         }
     },

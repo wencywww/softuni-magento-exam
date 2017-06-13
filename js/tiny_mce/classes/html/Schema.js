@@ -13,9 +13,8 @@
 
 	function split(str, delim) {
 		return str.split(delim || ',');
-	};
-
-	/**
+    }
+    /**
 	 * Unpacks the specified lookup and string data it will also parse it into an object
 	 * map with sub object for it's children. This will later also include the attributes.
 	 */
@@ -26,9 +25,8 @@
 			return value.replace(/[A-Z]+/g, function(key) {
 				return replace(lookup[key]);
 			});
-		};
-
-		// Unpack lookup
+        }
+        // Unpack lookup
 		for (key in lookup) {
 			if (lookup.hasOwnProperty(key))
 				lookup[key] = replace(lookup[key]);
@@ -46,9 +44,8 @@
 		});
 
 		return elements;
-	};
-
-	/**
+    }
+    /**
 	 * Returns the HTML5 schema and caches it in the mapCache.
 	 */
 	function getHTML5() {
@@ -173,9 +170,8 @@
 		}
 
 		return html5;
-	};
-
-	/**
+    }
+    /**
 	 * Returns the HTML4 schema and caches it in the mapCache.
 	 */
 	function getHTML4() {
@@ -304,9 +300,8 @@
 		}
 
 		return html4;
-	};
-
-	/**
+    }
+    /**
 	 * Schema validator class.
 	 *
 	 * @class tinymce.html.Schema
@@ -352,9 +347,8 @@
 			}
 
 			return value;
-		};
-
-		settings = settings || {};
+        }
+        settings = settings || {};
 		schemaItems = settings.schema == "html5" ? getHTML5() : getHTML4();
 
 		// Allow all elements and attributes if verify_html is set to false
@@ -385,9 +379,8 @@
 		// Converts a wildcard expression string to a regexp for example *a will become /.*a/.
 		function patternToRegExp(str) {
 			return new RegExp('^' + str.replace(/([?+*])/g, '.$1') + '$');
-		};
-
-		// Parses the specified valid_elements string and adds to the current rules
+        }
+        // Parses the specified valid_elements string and adds to the current rules
 		// This function is a bit hard to read since it's heavily optimized for speed
 		function addValidElements(valid_elements) {
 			var ei, el, ai, al, yl, matches, element, attr, attrData, elementName, attrName, attrType, attributes, attributesOrder,
@@ -526,9 +519,8 @@
 					}
 				}
 			}
-		};
-
-		function setValidElements(valid_elements) {
+        }
+        function setValidElements(valid_elements) {
 			elements = {};
 			patternElements = [];
 
@@ -537,9 +529,8 @@
 			each(schemaItems, function(element, name) {
 				children[name] = element.children;
 			});
-		};
-
-		// Adds custom non HTML elements to the schema
+        }
+        // Adds custom non HTML elements to the schema
 		function addCustomElements(custom_elements) {
 			var customElementRegExp = /^(~)?(.+)$/;
 
@@ -571,9 +562,8 @@
 					});
 				});
 			}
-		};
-
-		// Adds valid children to the schema object
+        }
+        // Adds valid children to the schema object
 		function addValidChildren(valid_children) {
 			var childRuleRegExp = /^([+\-]?)(\w+)\[([^\]]+)\]$/;
 
@@ -601,9 +591,8 @@
 					}
 				});
 			}
-		};
-
-		function getElementRule(name) {
+        }
+        function getElementRule(name) {
 			var element = elements[name], i;
 
 			// Exact match found
@@ -618,9 +607,8 @@
 				if (element.pattern.test(name))
 					return element;
 			}
-		};
-
-		if (!settings.valid_elements) {
+        }
+        if (!settings.valid_elements) {
 			// No valid elements defined then clone the elements from the schema spec
 			each(schemaItems, function(element, name) {
 				elements[name] = {

@@ -1328,9 +1328,8 @@
 				}
 
 				t.remove(e);
-			};
-
-			return this.run(e, function(e) {
+            }
+            return this.run(e, function(e) {
 				e = t.get(e);
 
 				// Only set HTML on elements
@@ -1494,9 +1493,8 @@
 				s = parseInt(s, 10).toString(16);
 
 				return s.length > 1 ? s : '0' + s; // 0 -> 00
-			};
-
-			if (c) {
+            }
+            if (c) {
 				s = '#' + hex(c[1]) + hex(c[2]) + hex(c[3]);
 
 				return s;
@@ -1564,9 +1562,8 @@
 							break;
 					}
 				});
-			};
-
-			try {
+            }
+            try {
 				each(t.doc.styleSheets, addClasses);
 			} catch (ex) {
 				// Ignore
@@ -1831,9 +1828,8 @@
 				}
 
 				return node;
-			};
-
-			if (pe && e) {
+            }
+            if (pe && e) {
 				// Get before chunk
 				r.setStart(pe.parentNode, t.nodeIndex(pe));
 				r.setEnd(e.parentNode, t.nodeIndex(e));

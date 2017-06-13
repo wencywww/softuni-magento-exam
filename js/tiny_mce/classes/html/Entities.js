@@ -195,13 +195,11 @@
 				return text.replace(attr ? attrsCharsRegExp : textCharsRegExp, function(chr) {
 					return baseEntities[chr] || entities[chr] || '&#' + chr.charCodeAt(0) + ';' || chr;
 				});
-			};
-
-			function encodeCustomNamed(text, attr) {
+            }
+            function encodeCustomNamed(text, attr) {
 				return Entities.encodeNamed(text, attr, entities);
-			};
-
-			// Replace + with , to be compatible with previous TinyMCE versions
+            }
+            // Replace + with , to be compatible with previous TinyMCE versions
 			name = tinymce.makeMap(name.replace(/\+/g, ','));
 
 			// Named and numeric encoder

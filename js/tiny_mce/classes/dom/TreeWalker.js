@@ -33,9 +33,8 @@ tinymce.dom.TreeWalker = function(start_node, root_node) {
 				}
 			}
 		}
-	};
-
-	/**
+    }
+    /**
 	 * Returns the current node.
 	 *
 	 * @return {Node} Current node where the walker is.

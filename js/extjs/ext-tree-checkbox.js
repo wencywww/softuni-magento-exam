@@ -157,7 +157,7 @@ Ext.extend(Ext.tree.CheckboxNodeUI, Ext.tree.TreeNodeUI, {
         }
         var n = this.node;
         var tree = n.getOwnerTree();
-        var parentNode = n.parentNode;n
+        var parentNode = n.parentNode;n;
         if( !n.expanded && !n.childrenRendered ) {
             n.expand(false, false, this.check.createDelegate(this, arguments));
         }

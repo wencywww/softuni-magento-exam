@@ -62,7 +62,7 @@ Calendar = function (firstDayOfWeek, dateStr, onSelected, onClose) {
         // table of short day names
         if (typeof Calendar._SDN_len == "undefined")
             Calendar._SDN_len = 3;
-        var ar = new Array();
+        var ar = [];
         for (var i = 8; i > 0;) {
             ar[--i] = Calendar._DN[i].substr(0, Calendar._SDN_len);
         }
@@ -70,7 +70,7 @@ Calendar = function (firstDayOfWeek, dateStr, onSelected, onClose) {
         // table of short month names
         if (typeof Calendar._SMN_len == "undefined")
             Calendar._SMN_len = 3;
-        ar = new Array();
+        ar = [];
         for (var i = 12; i > 0;) {
             ar[--i] = Calendar._MN[i].substr(0, Calendar._SMN_len);
         }
@@ -117,7 +117,7 @@ Calendar.getStyle = function(element, style) {
  */
 Calendar.getAbsolutePos = function(element) {
 
-    var res = new Object();
+    var res = {};
     res.x = 0; res.y = 0;
 
     // variant 1 (working best, copy-paste from prototype library)
@@ -205,7 +205,7 @@ Calendar.removeClass = function(el, className) {
         return;
     }
     var cls = el.className.split(" ");
-    var ar = new Array();
+    var ar = [];
     for (var i = cls.length; i > 0;) {
         if (cls[--i] != className) {
             ar[ar.length] = cls[i];
@@ -689,7 +689,7 @@ Calendar.cellClick = function(el, ev) {
                 date.setDate(max);
             }
             date.setMonth(m);
-        };
+        }
         switch (el.navtype) {
             case 400:
             Calendar.removeClass(el, "hilite");
@@ -931,7 +931,7 @@ Calendar.prototype.create = function (_par) {
                 }
                 Calendar._add_evs(part);
                 return part;
-            };
+            }
             var hrs = cal.date.getHours();
             var mins = cal.date.getMinutes();
             var t12 = !cal.time24;
@@ -1072,17 +1072,18 @@ Calendar._keyEvent = function(ev) {
                 x = p & 15;
                 y = p >> 4;
                 ne = cal.ar_days[y][x];
-            };setVars();
+            }
+            setVars();
             function prevMonth() {
                 var date = new CalendarDateObject(cal.date);
                 date.setDate(date.getDate() - step);
                 cal.setDate(date);
-            };
+            }
             function nextMonth() {
                 var date = new CalendarDateObject(cal.date);
                 date.setDate(date.getDate() + step);
                 cal.setDate(date);
-            };
+            }
             while (1) {
                 switch (K) {
                     case 37: // KEY left
@@ -1177,7 +1178,7 @@ Calendar.prototype._init = function (firstDayOfWeek, date) {
 
     var row = this.tbody.firstChild;
     var MN = Calendar._SMN[month];
-    var ar_days = this.ar_days = new Array();
+    var ar_days = this.ar_days = [];
     var weekend = Calendar._TT["WEEKEND"];
     var dates = this.multiple ? (this.datesCells = {}) : null;
     for (var i = 0; i < 6; ++i, row = row.nextSibling) {
@@ -1467,7 +1468,7 @@ Calendar.prototype.showAtElement = function (el, opts) {
         if (tmp > 0) box.x -= tmp;
         tmp = box.y + box.height - br.y;
         if (tmp > 0) box.y -= tmp;
-    };
+    }
     this.element.style.display = "block";
     Calendar.continuation_for_the_fucking_khtml_browser = function() {
         var w = self.element.offsetWidth;
@@ -1544,9 +1545,8 @@ Calendar.prototype.hideShowCovered = function () {
                 value = '';
         }
         return value;
-    };
-
-    var tags = new Array("applet", "iframe", "select");
+    }
+    var tags = ["applet", "iframe", "select"];
     var el = this.element;
 
     var p = Calendar.getAbsolutePos(el);
@@ -1639,7 +1639,7 @@ Calendar.prototype._dragStart = function (ev) {
 // BEGIN: DATE OBJECT PATCHES
 
 /** Adds the number of days array to the Date object. */
-Date._MD = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+Date._MD = [31,28,31,30,31,30,31,31,30,31,30,31];
 
 /** Constants used for time computations */
 Date.SECOND = 1000 /* milliseconds */;

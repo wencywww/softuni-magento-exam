@@ -223,7 +223,7 @@ Product.OptionsPrice.prototype = {
                         $(pair.value+this.duplicateIdSuffix).innerHTML = formattedPrice;
                     }
                 }
-            };
+            }
         }.bind(this));
 
         if (typeof(skipTierPricePercentUpdate) === "undefined" && typeof(this.tierPrices) !== "undefined") {

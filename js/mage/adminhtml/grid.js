@@ -210,7 +210,7 @@ varienGrid.prototype = {
                     }
                 }.bind(this)
             });
-            return;
+
         }
         else{
             if(this.reloadParams){

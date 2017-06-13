@@ -63,7 +63,7 @@ function MultiSelector( list_target, field_name, max, new_element_html, delete_t
         this.max = max;
     } else {
         this.max = -1;
-    };
+    }
     this.new_element_html = new_element_html;
     this.delete_text = delete_text;
     this.new_file_input = new_file_input;
@@ -108,8 +108,7 @@ function MultiSelector( list_target, field_name, max, new_element_html, delete_t
             // If we've reached maximum number, disable input element
             if( this.max != -1 && this.count >= this.max ){
                 element.disabled = true;
-            };
-
+            }
             // File element counter
             this.count++;
             // Most recent element
@@ -118,8 +117,7 @@ function MultiSelector( list_target, field_name, max, new_element_html, delete_t
         } else {
             // This can only be applied to file input elements!
             alert( 'Error: not a file input element' );
-        };
-
+        }
     };
 
     /**
@@ -255,4 +253,4 @@ function MultiSelector( list_target, field_name, max, new_element_html, delete_t
     };
 
 
-};
+}

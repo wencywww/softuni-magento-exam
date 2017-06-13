@@ -54,7 +54,7 @@ FABridge.addToUserTypes = function()
             'enriched': false
         };
     }
-}
+};
 
 FABridge.argsToArray = function(args)
 {
@@ -64,7 +64,7 @@ FABridge.argsToArray = function(args)
         result[i] = args[i];
     }
     return result;
-}
+};
 
 function instanceFactory(objID)
 {
@@ -98,7 +98,7 @@ FABridge.addInitializationCallback = function(bridgeName, callback)
     }
 
     callbackList.push(callback);
-}
+};
 
 // updated for changes to SWFObject2
 function FABridge__bridgeInitialized(bridgeName) {
@@ -173,7 +173,7 @@ FABridge.extractBridgeFromID = function(id)
 {
     var bridgeID = (id >> 16);
     return FABridge.idMap[bridgeID];
-}
+};
 
 FABridge.attachBridge = function(instance, bridgeName)
 {
@@ -205,7 +205,7 @@ FABridge.attachBridge = function(instance, bridgeName)
     
     // reuse bridge if it exists
 //    delete FABridge.initCallbacks[bridgeName]
-}
+};
 
 // some methods can't be proxied.  You can use the explicit get,set, and call methods if necessary.
 
@@ -411,7 +411,7 @@ FABridge.prototype =
         ty[setterName] = function(val)
         {
             this.bridge.setPropertyInAS(this.fb_instance_id, propName, val);
-        }
+        };
         ty[getterName] = function()
         {
             return this.bridge.deserialize(this.bridge.getPropertyFromAS(this.fb_instance_id, propName));

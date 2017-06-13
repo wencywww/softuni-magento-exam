@@ -11,9 +11,8 @@
 (function(tinymce) {
 	function trimNl(s) {
 		return s.replace(/[\n\r]+/g, '');
-	};
-
-	// Shorten names
+    }
+    // Shorten names
 	var is = tinymce.is, isIE = tinymce.isIE, each = tinymce.each, TreeWalker = tinymce.dom.TreeWalker;
 
 	/**
@@ -369,9 +368,8 @@
 				});
 
 				return index;
-			};
-
-			function normalizeTableCellSelection(rng) {
+            }
+            function normalizeTableCellSelection(rng) {
 				function moveEndPoint(start) {
 					var container, offset, childNodes, prefix = start ? 'start' : 'end';
 
@@ -386,15 +384,13 @@
 							rng['set' + (start ? 'Start' : 'End')](container, offset);
 						}
 					}
-				};
-
-				moveEndPoint(true);
+                }
+                moveEndPoint(true);
 				moveEndPoint();
 
 				return rng;
-			};
-
-			function getLocation() {
+            }
+            function getLocation() {
 				var rng = t.getRng(true), root = dom.getRoot(), bookmark = {};
 
 				function getPoint(rng, start) {
@@ -423,17 +419,15 @@
 						point.push(t.dom.nodeIndex(container, normalized));
 
 					return point;
-				};
-
-				bookmark.start = getPoint(rng, true);
+                }
+                bookmark.start = getPoint(rng, true);
 
 				if (!t.isCollapsed())
 					bookmark.end = getPoint(rng);
 
 				return bookmark;
-			};
-
-			if (type == 2) {
+            }
+            if (type == 2) {
 				if (t.tridentSel)
 					return t.tridentSel.getBookmark(type);
 
@@ -569,9 +563,8 @@
 				}
 
 				return true;
-			};
-
-			function restoreEndPoint(suffix) {
+            }
+            function restoreEndPoint(suffix) {
 				var marker = dom.get(bookmark.id + '_' + suffix), node, idx, next, prev, keep = bookmark.keep;
 
 				if (marker) {
@@ -631,17 +624,15 @@
 						}
 					}
 				}
-			};
-
-			function addBogus(node) {
+            }
+            function addBogus(node) {
 				// Adds a bogus BR element for empty block elements
 				if (dom.isBlock(node) && !node.innerHTML && !isIE)
 					node.innerHTML = '<br data-mce-bogus="1" />';
 
 				return node;
-			};
-
-			if (bookmark) {
+            }
+            if (bookmark) {
 				if (bookmark.start) {
 					rng = dom.createRng();
 					root = dom.getRoot();
@@ -724,9 +715,8 @@
 						return;
 					}
 				} while (node = (start ? walker.next() : walker.prev()));
-			};
-
-			if (node) {
+            }
+            if (node) {
 				idx = dom.nodeIndex(node);
 				rng.setStart(node.parentNode, idx);
 				rng.setEnd(node.parentNode, idx + 1);
@@ -947,9 +937,8 @@
 					n = forwards ? n.nextSibling : n.previousSibling;
 				}
 				return n || orig;
-			};
-
-			// Range maybe lost after the editor is made visible again
+            }
+            // Range maybe lost after the editor is made visible again
 			if (!rng)
 				return t.dom.getRoot();
 
@@ -1055,9 +1044,8 @@
 							return true;
 						}
 					}
-				};
-
-				// Walks the dom left/right to find a suitable text node to move the endpoint into
+                }
+                // Walks the dom left/right to find a suitable text node to move the endpoint into
 				// It will only walk within the current parent block or body and will stop if it hits a block or a BR/IMG
 				function findTextNodeRelative(left, startNode) {
 					var walker, lastInlineElement;
@@ -1089,9 +1077,8 @@
 						normalized = true;
 						offset = 0;
 					}
-				};
-
-				container = rng[(start ? 'start' : 'end') + 'Container'];
+                }
+                container = rng[(start ? 'start' : 'end') + 'Container'];
 				offset = rng[(start ? 'start' : 'end') + 'Offset'];
 				nonEmptyElementsMap = dom.schema.getNonEmptyElements();
 
@@ -1183,9 +1170,8 @@
 				// Set endpoint if it was normalized
 				if (normalized)
 					rng['set' + (start ? 'Start' : 'End')](container, offset);
-			};
-
-			// Normalize only on non IE browsers for now
+            }
+            // Normalize only on non IE browsers for now
 			if (tinymce.isIE)
 				return;
 			
@@ -1305,9 +1291,8 @@
 				}
 
 				return rng;
-			};
-
-			// Fires while the selection is changing
+            }
+            // Fires while the selection is changing
 			function selectionChange(e) {
 				var pointRng;
 
@@ -1340,9 +1325,8 @@
 				dom.unbind(doc, 'mouseup', endSelection);
 				dom.unbind(doc, 'mousemove', selectionChange);
 				startRng = started = 0;
-			};
-
-			// Make HTML element unselectable since we are going to handle selection by hand
+            }
+            // Make HTML element unselectable since we are going to handle selection by hand
 			doc.documentElement.unselectable = true;
 			
 			// Detect when user selects outside BODY

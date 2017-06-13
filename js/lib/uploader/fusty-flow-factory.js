@@ -7,7 +7,7 @@
       return flow;
     }
     return new FustyFlow(opts);
-  }
+  };
 
   window.fustyFlowFactory = fustyFlowFactory;
 

@@ -47,12 +47,10 @@ tinymce.html.Styles = function(settings, schema) {
 			val = parseInt(val).toString(16);
 
 			return val.length > 1 ? val : '0' + val; // 0 -> 00
-		};
-
-		return '#' + hex(r) + hex(g) + hex(b);
-	};
-
-	return {
+        }
+        return '#' + hex(r) + hex(g) + hex(b);
+    }
+    return {
 		/**
 		 * Parses the specified RGB color value and returns a hex version of that color.
 		 *
@@ -108,9 +106,8 @@ tinymce.html.Styles = function(settings, schema) {
 				delete styles[prefix + '-right' + suffix];
 				delete styles[prefix + '-bottom' + suffix];
 				delete styles[prefix + '-left' + suffix];
-			};
-
-			/**
+            }
+            /**
 			 * Checks if the specific style can be compressed in other words if all border-width are equal.
 			 */
 			function canCompress(key) {
@@ -129,9 +126,8 @@ tinymce.html.Styles = function(settings, schema) {
 				styles[key] = value[0];
 
 				return true;
-			};
-
-			/**
+            }
+            /**
 			 * Compresses multiple styles into one style.
 			 */
 			function compress2(target, a, b, c) {
@@ -149,16 +145,14 @@ tinymce.html.Styles = function(settings, schema) {
 				delete styles[a];
 				delete styles[b];
 				delete styles[c];
-			};
-
-			// Encodes the specified string by replacing all \" \' ; : with _<num>
+            }
+            // Encodes the specified string by replacing all \" \' ; : with _<num>
 			function encode(str) {
 				isEncoded = true;
 
 				return encodingLookup[str];
-			};
-
-			// Decodes the specified string by replacing all _<num> with it's original value \" \' etc
+            }
+            // Decodes the specified string by replacing all _<num> with it's original value \" \' etc
 			// It will also decode the \" \' if keep_slashes is set to fale or omitted
 			function decode(str, keep_slashes) {
 				if (isEncoded) {
@@ -171,9 +165,8 @@ tinymce.html.Styles = function(settings, schema) {
 					str = str.replace(/\\([\'\";:])/g, "$1");
 
 				return str;
-			};
-
-			function processUrl(match, url, url2, url3, str, str2) {
+            }
+            function processUrl(match, url, url2, url3, str, str2) {
 				str = str || str2;
 
 				if (str) {
@@ -191,9 +184,8 @@ tinymce.html.Styles = function(settings, schema) {
 
 				// Output new URL format
 				return "url('" + url.replace(/\'/g, "\\'") + "')";
-			};
-
-			if (css) {
+            }
+            if (css) {
 				// Encode \" \' % and ; and : inside strings so they don't interfere with the style parsing
 				css = css.replace(/\\[\"\';:\uFEFF]/g, encode).replace(/\"[^\"]+\"|\'[^\']+\'/g, function(str) {
 					return str.replace(/[;:]/g, encode);
@@ -263,9 +255,8 @@ tinymce.html.Styles = function(settings, schema) {
 							css += (css.length > 0 ? ' ' : '') + name + ': ' + value + ';';
 					}
 				}
-			};
-
-			// Serialize styles according to schema
+            }
+            // Serialize styles according to schema
 			if (element_name && schema && schema.styles) {
 				// Serialize global styles and element specific styles
 				serializeStyles('*');

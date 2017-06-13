@@ -263,8 +263,7 @@ function formatCurrency(price, format, showPlus){
     }
 
     return pattern.replace('%s', r).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-};
-
+}
 function expandDetails(el, childClass) {
     if (Element.hasClassName(el,'show-details')) {
         $$(childClass).each(function(item){
@@ -284,7 +283,7 @@ function expandDetails(el, childClass) {
 var isIE = navigator.appVersion.match(/MSIE/) == "MSIE";
 
 if (!window.Varien)
-    var Varien = new Object();
+    var Varien = {};
 
 Varien.showLoading = function(){
     var loader = $('loading-process');

@@ -27,7 +27,7 @@ CentinelAuthenticate.prototype = {
     initialize : function(blockId, iframeId)
     {
         this._isAuthenticationStarted = false;
-        this._relatedBlocks = new Array();
+        this._relatedBlocks = [];
         this.centinelBlockId = blockId;
         this.iframeId = iframeId;
         if (this._isCentinelBlocksLoaded()) {

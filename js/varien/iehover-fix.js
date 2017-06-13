@@ -33,13 +33,13 @@ function toggleMenu(el, over)
         
         if(iS){
             uL.addClassName('shown-sub');
-        };
+        }
     }
     else {
         Element.removeClassName(el, 'over');
         if(iS){
             uL.removeClassName('shown-sub');
-        };
+        }
     }
 }
 

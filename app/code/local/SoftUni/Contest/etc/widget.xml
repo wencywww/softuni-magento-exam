@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<widgets>
+    <softuni_contest_contests type="softuni_contest/widget_contest_list" translate="name description" module="softuni_contest">
+        <name>SoftUni Contests Lister</name>
+        <description>SoftUni Widget for Contests Links</description>
+        <parameters>
+            <titles translate="label">
+                <label>Title</label>
+                <visible>1</visible>
+                <type>text</type>
+                <sort_order>10</sort_order>
+            </titles>
+            <template translate="label">
+                <label>Template</label>
+                <visible>1</visible>
+                <type>select</type>
+                <value>softuni/contest/widget/contest/list.phtml</value>
+                <values>
+                    <default translate="label">
+                        <value>softuni/contest/widget/contest/list.phtml</value>
+                        <label>Default</label>
+                    </default>
+                </values>
+                <sort_order>15</sort_order>
+            </template>
+        </parameters>
+
+    </softuni_contest_contests>
+</widgets>

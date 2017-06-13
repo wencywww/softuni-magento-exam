@@ -340,13 +340,13 @@ RegionUpdater.prototype = {
     },
     sortSelect : function () {
         var elem = this.regionSelectEl;
-        var tmpArray = new Array();
+        var tmpArray = [];
         var currentVal = $(elem).value;
         for (var i = 0; i < $(elem).options.length; i++) {
             if (i == 0) {
                 continue;
             }
-            tmpArray[i-1] = new Array();
+            tmpArray[i-1] = [];
             tmpArray[i-1][0] = $(elem).options[i].text;
             tmpArray[i-1][1] = $(elem).options[i].value;
         }
@@ -356,7 +356,7 @@ RegionUpdater.prototype = {
             $(elem).options[i] = op;
         }
         $(elem).value = currentVal;
-        return;
+
     }
 };
 

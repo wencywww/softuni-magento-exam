@@ -80,7 +80,7 @@ Flex._getFlashPlayerVersionAsActiveX = function () {
         }
 
         return options['default'];
-    }
+    };
 
     var version = false;
 
