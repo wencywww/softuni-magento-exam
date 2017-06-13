@@ -14,9 +14,13 @@ function getContests()
         ->addFieldToFilter('is_active', 1)
         ->load();
 
+    if ( !count($contests->getData()) )
+    {
+        $out = "No active contests found";
+    }
     foreach ($contests->getData() as $val)
     {
-        $out.="<p><a href=\"softuni_contest/form/enter/cid/".$val['contest_id']."\">".$val['title']."</a></p>";
+        $out.="<h3><a href=\"softuni_contest/form/enter/cid/".$val['contest_id']."\">".$val['title']."</a></h3>";
     }
 
     return $out;
