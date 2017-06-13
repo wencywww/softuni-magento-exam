@@ -1,0 +1,42 @@
+<?php $stats = getStats(); ?>
+
+<table>
+    <tr><td nowrap width="300"><?php echo Mage::helper('sales')->__('Completed orders count')?>:</td><td nowrap align="right"><?php echo $stats['completed']; ?></td></tr>
+    <tr><td nowrap width="300"><?php echo Mage::helper('sales')->__('Incomplete orders count')?>:</td><td nowrap align="right"><?php echo $stats['non-completed']; ?></td></tr>
+    <tr><td nowrap width="300"><?php echo Mage::helper('sales')->__('Total Active Magento products')?>:</td><td nowrap align="right"><?php echo $stats['mageProducts']; ?></td></tr>
+</table>
+
+
+<?php function getStats(){
+
+    $customerID = Mage::getSingleton('customer/session')->getCustomer()->getId();
+    $ordersCollection = Mage::getModel('sales/order')->getCollection()
+        ->addFieldToFilter('customer_id', $customerID)
+        ->load();
+
+    //var_dump($ordersCollection->getData()) ;
+    $data = $ordersCollection->getData();
+
+    $out = array();
+    foreach ($data as $val)
+    {
+        if ($val['status'] == "complete")
+        {
+            $out['completed'] ++;
+        }else{
+            $out['non-completed'] += 1;
+        }
+    }
+
+
+    $productsCollection = Mage::getModel('catalog/product')->getCollection()
+        ->addAttributeToFilter('status', array('eq'=>'1'))
+        ->load();
+
+    $out['mageProducts'] = $productsCollection->getSize();
+
+    return $out;
+}
+?>
+
+

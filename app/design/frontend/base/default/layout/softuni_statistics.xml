@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <softuni_statistics_statistics_index>
+        <!--<remove name="root"/>-->
+        <remove name="right"/>
+        <!--<remove name="left"/>-->
+
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="softuni_statistics/statistics" name="softuni_statistics.statistics" template="softuni/statistics/statistics.phtml">
+            </block>
+        </reference>
+    </softuni_statistics_statistics_index>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="newsletter">
+                <name>stats</name>
+                <path>softuni_statistics/statistics/</path>
+                <label>SoftUni Statistics</label>
+            </action>
+        </reference>
+    </customer_account>
+
+</layout>
