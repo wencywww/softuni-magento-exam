@@ -7,4 +7,12 @@
             </block>
         </reference>
     </softuni_contest_form_enter>
+
+    <softuni_contest_contestants_list>
+                <!--<remove name="root"/>-->
+        <reference name="content">
+            <block type="softuni_contest/list" name="softuni_contest.list" template="softuni/contest/list.phtml">
+            </block>
+        </reference>
+    </softuni_contest_contestants_list>
 </layout>

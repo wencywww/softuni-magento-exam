@@ -11,18 +11,26 @@ class SoftUni_Contest_FormController extends Mage_Core_Controller_Front_Action
     public function persistAction()
     {
         $post = Mage::app()->getRequest()->getPost();
-        //var_dump($post); die();
 
-        $postedData = Mage::getModel('softuni_contest/contestant');
-        //$postedData->setData($post)->save(); //this also works (nor errors on the frontend), but PS says that VarienObject does not have a method save(), why it is working then??
-        $postedData->setData($post);
-        $postedData->setCreatedAt(date('Y-m-d H:i:s'));  //по условие не се иска, слагаме го обаче, защото е логически вярно
-        $postedData->setUpdatedAt(date('Y-m-d H:i:s'));  //по условие не се иска, слагаме го обаче, защото е логически вярно
-        $postedData->save();
-        //var_dump($postedData); die();
-        //$postedData // Not working - @todo - check why
-        //$postedData->save();
-        //die;
+        $contestID = $post['contest_id'];
+        $contestModel = Mage::getModel('softuni_contest/contest')->load($contestID);
+
+        //var_dump((bool) $contestModel->getIsActive());die;
+
+        if($contestModel->isEmpty() || !(bool) $contestModel->getIsActive()) //do not save if the context do not exist or not is_active
+        {
+            $this->_redirectReferer();
+            return;
+        }
+
+        $contestantModel = Mage::getModel('softuni_contest/contestant');
+
+        $contestantModel->setData($post);
+        $contestantModel->setApproved(0); //set approved to zero
+        $contestantModel->setCreatedAt(date('Y-m-d H:i:s'));  //по условие не се иска, слагаме го обаче, защото е логически вярно
+        $contestantModel->setUpdatedAt(date('Y-m-d H:i:s'));  //по условие не се иска, слагаме го обаче, защото е логически вярно
+        $contestantModel->save();
+
         $this->_redirectReferer();
     }
 }

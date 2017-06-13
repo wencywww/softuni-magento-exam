@@ -1,0 +1,52 @@
+<?php
+    $contestInfo = getContestInfo();
+?>
+
+<?php if ( $contestInfo['is_active'] ) {
+    $contestantsInfo = getContestantsInfo($contestInfo['id']);?>
+    <h1><?php echo Mage::helper('softuni_contest')->__('List of Contestants for contest'); ?>:<br> <?php echo $contestInfo['title'];?></h1>
+    <?php if (count($contestantsInfo)) { ?>
+
+        <?php foreach ($contestantsInfo as $val) { ?>
+            <p>
+                <?php echo $val['firstname']; ?>,
+                <?php echo mb_substr($val['lastname'],0,1); ?>,
+                <?php echo $val['country']; ?>,
+                <?php echo $val['city']; ?>
+             </p>
+        <?php } ?>
+
+    <?php }else{?>
+        <h4 style="color: red"><?php echo Mage::helper('softuni_contest')->__('This contest has no approved contestants'); ?>.</h4>
+    <?php }?>
+
+<?php }else{ ?>
+    <h1 style="color: red"><?php echo Mage::helper('softuni_contest')->__('This contest is unavailable'); ?>.</h1>
+<?php } ?>
+
+
+
+<?php
+    function getContestInfo()
+    {
+        $contestID = Mage::app()->getRequest()->getParam('cid');
+        $title = Mage::getModel('softuni_contest/contest')->load((int) $contestID)->getData('title');
+        $is_active = Mage::getModel('softuni_contest/contest')->load((int) $contestID)->getData('is_active');
+        if (!is_numeric($contestID)) {$is_active = false;}
+        return array('title'=>$title, 'id'=>$contestID, 'is_active' => (bool) $is_active);
+    }
+
+    function getContestantsInfo()
+    {
+        $contestID = Mage::app()->getRequest()->getParam('cid');
+        $contestants = Mage::getModel('softuni_contest/contestant')->getCollection()
+        ->addFieldToSelect(array('firstname', 'lastname', 'country', 'city'))
+        ->addFieldToFilter('contest_id',$contestID)
+        ->addFieldToFilter('approved',1)
+        ->load();
+
+        return $contestants->getData();
+
+    }
+?>
+

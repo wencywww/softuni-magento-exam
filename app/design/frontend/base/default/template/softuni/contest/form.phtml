@@ -1,21 +1,29 @@
-<form action="<?php echo $this->getActionUrl(); ?>" method="post">
-    <h1><?php echo getContestInfo()['title']?></h1>
-    <label><?php echo Mage::helper('softuni_contest')->__('Name'); ?>: </label><br><input type="text" name="firstname"><br><br>
-    <label><?php echo Mage::helper('softuni_contest')->__('Family'); ?>: </label><br><input type="text" name="lastname"><br><br>
-    <label><?php echo Mage::helper('softuni_contest')->__('Birthday'); ?>: </label><br><input type="text" name="dob"><br><br>
-    <label><?php echo Mage::helper('softuni_contest')->__('Country'); ?>: </label><br><input type="text" name="country"><br><br>
-    <label><?php echo Mage::helper('softuni_contest')->__('City'); ?>: </label><br><input type="text" name="city"><br><br>
-    <label><?php echo Mage::helper('softuni_contest')->__('Message'); ?>: </label><br><input type="text" name="message"><br><br>
-    <input type="hidden" name="contest_id" value="<?php echo getContestInfo()['id'];?>">
-    <button><?php echo Mage::helper('softuni_contest')->__('Submit'); ?></button>
-</form>
+<?php if ( getContestInfo()['is_active'] ) { ?>
+    <form action="<?php echo $this->getActionUrl(); ?>" method="post">
+        <h1><?php echo getContestInfo()['title']?></h1>
+        <label for="name" class="required"><?php echo Mage::helper('softuni_contest')->__('Name'); ?>: </label><br><input required type="text" name="firstname"><br><br>
+        <label for="name" class="required"><?php echo Mage::helper('softuni_contest')->__('Family'); ?>: </label><br><input required type="text" name="lastname"><br><br>
+        <label for="name" class="required"><?php echo Mage::helper('softuni_contest')->__('Birthday'); ?>: </label><br><input required type="date" name="dob"><br><br>
+        <label for="name" class="required"><?php echo Mage::helper('softuni_contest')->__('Country'); ?>: </label><br><input required type="text" name="country"><br><br>
+        <label for="name" class="required"><?php echo Mage::helper('softuni_contest')->__('City'); ?>: </label><br><input required type="text" name="city"><br><br>
+        <label for="name" class="required"><?php echo Mage::helper('softuni_contest')->__('Message'); ?>: </label><br><textarea required name="message"></textarea><br><br>
+        <input type="hidden" name="contest_id" value="<?php echo getContestInfo()['id'];?>">
+        <button class="button"><?php echo Mage::helper('softuni_contest')->__('Submit'); ?></button>
+    </form>
+<?php }else{ ?>
+    <h1 style="color: red"><?php echo Mage::helper('softuni_contest')->__('This contest is unavailable'); ?>.</h1>
+<?php } ?>
+
+
 
 <?php
     function getContestInfo()
     {
         $contestID = Mage::app()->getRequest()->getParam('cid');
         $title = Mage::getModel('softuni_contest/contest')->load((int) $contestID)->getData('title');
-        return array('title'=>'Entering contest: '. $title, 'id'=>$contestID);
+        $is_active = Mage::getModel('softuni_contest/contest')->load((int) $contestID)->getData('is_active');
+        if (!is_numeric($contestID)) {$is_active = false;}
+        return array('title'=>Mage::helper('softuni_contest')->__('Entering contest').': '. $title, 'id'=>$contestID, 'is_active' => (bool) $is_active);
     }
 ?>
 
