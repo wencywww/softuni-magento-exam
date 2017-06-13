@@ -12,12 +12,21 @@ class SoftUni_Statistics_StatisticsController extends Mage_Core_Controller_Front
 //            return;
 //        }
 
-        if ( !Mage::getSingleton('customer/session')->isLoggedIn() ) {
+        $statPagePermitted = Mage::helper('softuni_statistics')->statsPageAvailable();
+
+        //var_dump($statPagePermitted);
+
+        if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
             $this->getResponse()->setHeader('Login-Required', 'true');
             $this->_forward('defaultNoRoute');
-        }else{
-            $this->loadLayout();
-            $this->renderLayout();
+        } else {
+            if ($statPagePermitted) {
+                $this->loadLayout();
+                $this->renderLayout();
+            } else {
+                $this->_forward('defaultNoRoute');
+            }
+
         }
 
     }

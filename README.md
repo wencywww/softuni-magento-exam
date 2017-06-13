@@ -40,3 +40,5 @@ http://store-url/softuni_statistics/statistics
 available also as link from the Customer Navigation Menu (the last one, named 'СОФТУНИ СТАТИСТИКА')
 
 Frontend interface must be in English for the translations to work.
+
+A SOFTUNI tab is created within the System->Configuration to enable/disable statistics page

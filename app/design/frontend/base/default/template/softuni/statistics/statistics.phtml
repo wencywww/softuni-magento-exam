@@ -1,9 +1,9 @@
 <?php $stats = getStats(); ?>
 
 <table>
-    <tr><td nowrap width="300"><?php echo Mage::helper('sales')->__('Completed orders count')?>:</td><td nowrap align="right"><?php echo $stats['completed']; ?></td></tr>
-    <tr><td nowrap width="300"><?php echo Mage::helper('sales')->__('Incomplete orders count')?>:</td><td nowrap align="right"><?php echo $stats['non-completed']; ?></td></tr>
-    <tr><td nowrap width="300"><?php echo Mage::helper('sales')->__('Total Active Magento products')?>:</td><td nowrap align="right"><?php echo $stats['mageProducts']; ?></td></tr>
+    <tr><td nowrap width="300"><?php echo Mage::helper('softuni_statistics')->__('Completed orders count')?>:</td><td nowrap align="right"><?php echo $stats['completed']; ?></td></tr>
+    <tr><td nowrap width="300"><?php echo Mage::helper('softuni_statistics')->__('Incomplete orders count')?>:</td><td nowrap align="right"><?php echo $stats['non-completed']; ?></td></tr>
+    <tr><td nowrap width="300"><?php echo Mage::helper('softuni_statistics')->__('Total Active Magento products')?>:</td><td nowrap align="right"><?php echo $stats['mageProducts']; ?></td></tr>
 </table>
 
 

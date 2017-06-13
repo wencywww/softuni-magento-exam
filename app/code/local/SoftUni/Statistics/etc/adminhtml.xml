@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <softuni_statistics translate="title" module="softuni_stastistics">
+                                        <title>SoftUni Statistics</title>
+                                        <sort_order>50</sort_order>
+                                    </softuni_statistics>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

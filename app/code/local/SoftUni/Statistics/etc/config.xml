@@ -13,6 +13,12 @@
             </softuni_statistics>
         </blocks>
 
+        <models>
+            <softuni_statistics>
+                <class>SoftUni_Statistics_Model</class>
+            </softuni_statistics>
+        </models>
+
         <helpers>
             <softuni_statistics>
                 <class>SoftUni_Statistics_Helper</class>
@@ -48,6 +54,17 @@
             </updates>
         </layout>
     </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <SoftUni_Statistics>
+                    <files>
+                        <default>SoftUni_Statistics.csv</default>
+                    </files>
+                </SoftUni_Statistics>
+            </modules>
+        </translate>
+    </adminhtml>
 
 
 </config>
